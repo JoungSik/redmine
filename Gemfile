@@ -32,7 +32,7 @@ gem 'net-smtp', '~> 0.5.1'
 gem 'ostruct'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :x64_mingw, :mswin]
+gem 'tzinfo-data', platforms: [ :mingw, :x64_mingw, :mswin ]
 
 # TOTP-based 2-factor authentication
 gem 'rotp', '>= 5.0.0'
@@ -53,6 +53,12 @@ end
 group :minimagick do
   gem 'mini_magick', '~> 5.2.0'
 end
+
+# Cron job scheduler [https://github.com/javan/whenever]
+gem "whenever", require: false
+
+# Reduces boot times through caching; required in config/boot.rb
+gem "bootsnap", require: false
 
 # Include database gems for the adapters found in the database
 # configuration file
@@ -112,7 +118,7 @@ group :test do
   gem "rails-dom-testing", '>= 2.3.0'
   gem 'mocha', '>= 2.0.1'
   gem 'simplecov', '~> 0.22.0', :require => false
-  gem "ffi", platforms: [:mingw, :x64_mingw, :mswin]
+  gem "ffi", platforms: [ :mingw, :x64_mingw, :mswin ]
   # For running system tests
   gem 'puma'
   gem "capybara", ">= 3.39"
