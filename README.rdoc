@@ -2,4 +2,181 @@
 
 Redmine is a flexible project management web application written using Ruby on Rails framework.
 
-More details can be found in the doc directory or on the official website https://www.redmine.org
+== Features
+
+* *Issue Tracking*: Comprehensive bug tracking and task management
+* *Project Management*: Multi-project support with flexible permissions
+* *Time Tracking*: Track time spent on projects and issues
+* *Wiki*: Built-in wiki functionality for documentation
+* *Repository Integration*: Support for Git, SVN, Mercurial, CVS, and Bazaar
+* *Multi-language Support*: Available in 30+ languages
+* *Plugin Architecture*: Extensible through plugins
+* *Email Integration*: Email notifications and issue creation via email
+* *User Management*: Flexible user and role-based permission system
+* *Document Management*: File and document sharing
+* *News and Forums*: Project news and discussion boards
+
+== Requirements
+
+* *Ruby*: >= 3.2.0, < 3.5.0
+* *Rails*: 7.2.2.1
+* *Database*: MySQL, PostgreSQL, SQLite3, or SQL Server
+* *Web Server*: Puma (recommended) or any Rack-compatible server
+
+== Installation
+
+1. *Clone the repository*:
+     git clone https://github.com/redmine/redmine.git
+     cd redmine
+
+2. *Install dependencies*:
+     bundle install
+
+3. *Configure database*:
+   * Copy <tt>config/database.yml.example</tt> to <tt>config/database.yml</tt>
+   * Edit the configuration for your database
+
+4. *Run database migrations*:
+     rails db:migrate
+
+5. *Load default configuration*:
+     rails redmine:load_default_data
+
+6. *Start the application*:
+     rails server
+
+Visit http://localhost:3000 to access your Redmine installation.
+
+== Development
+
+=== Project Structure
+
+* *<tt>app/</tt>*: Core application code
+  * <tt>controllers/</tt>: Handle HTTP requests and application logic
+  * <tt>models/</tt>: Define data structures and business logic
+  * <tt>views/</tt>: Render HTML templates and user interfaces
+  * <tt>helpers/</tt>: Provide view-specific utility methods
+  * <tt>assets/</tt>: Contains fonts, images, and JavaScript files
+  * <tt>jobs/</tt>: Background job processing classes
+
+* *<tt>config/</tt>*: Application configuration
+  * Database, routes, environments, initializers
+  * Multi-language locale files
+
+* *<tt>db/</tt>*: Database schema and migrations
+  * Over 200 migration files showing schema evolution
+
+* *<tt>test/</tt>*: Test suites
+  * Unit, functional, integration, and system tests
+  * Test fixtures and data
+
+* *<tt>lib/</tt>*: Core Redmine library code and rake tasks
+* *<tt>plugins/</tt>*: Plugin system for extending functionality
+* *<tt>themes/</tt>*: UI theme customization
+* *<tt>public/</tt>*: Static web assets
+* *<tt>files/</tt>*: File storage location
+* *<tt>extra/</tt>*: Additional utilities and sample configurations
+
+=== Running Tests
+
+  # Run all tests
+  bundle exec rails test
+
+  # Run specific test types
+  bundle exec rails test:units
+  bundle exec rails test:functionals
+  bundle exec rails test:integration
+  bundle exec rails test:system
+
+=== Code Quality
+
+  # Run RuboCop for code style checking
+  bundle exec rubocop
+
+  # Run security audit
+  bundle exec bundle-audit
+
+== Docker Support
+
+Build and run Redmine using Docker:
+
+  # Build the image
+  docker build -t redmine .
+
+  # Run with Docker Compose (recommended)
+  docker-compose up
+
+== Deployment with Kamal
+
+Redmine includes Kamal configuration for easy deployment. Kamal is a modern deployment tool for containerized applications.
+
+=== Setup
+
+1. *Configure deployment settings*:
+   * Edit <tt>config/deploy.yml</tt> for your deployment environment
+   * Set required environment variables:
+     * <tt>SSH_HOST</tt>: Target server hostname
+     * <tt>SSH_USER</tt>: SSH username for deployment
+     * <tt>REGISTRY_USER</tt>: Container registry username
+     * <tt>KAMAL_REGISTRY_PASSWORD</tt>: Container registry password
+     * <tt>RAILS_MASTER_KEY</tt>: Rails master key for credentials
+
+2. *Deploy the application*:
+     kamal setup    # First-time setup
+     kamal deploy   # Deploy updates
+
+=== Kamal Commands
+
+  # Setup server and deploy for the first time
+  kamal setup
+
+  # Deploy application updates
+  kamal deploy
+
+  # Check deployment status
+  kamal app details
+
+  # View application logs
+  kamal app logs
+
+  # Roll back to previous version
+  kamal rollback
+
+The configuration includes persistent volumes for data, storage, plugins, and repositories to ensure data persistence across deployments.
+
+== Plugins and Themes
+
+Redmine supports plugins and themes for customization:
+
+* *Plugins*: Place in the <tt>plugins/</tt> directory
+* *Themes*: Place in the <tt>public/themes/</tt> directory
+
+== Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests for your changes
+5. Ensure all tests pass
+6. Submit a pull request
+
+Please read CONTRIBUTING.md for detailed contribution guidelines.
+
+== License
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+See LICENSE.txt for more details.
+
+== Links
+
+* *Official Website*: https://www.redmine.org
+* *Documentation*: https://www.redmine.org/guide
+* *Forums*: https://www.redmine.org/projects/redmine/boards
+* *Source Code*: https://github.com/redmine/redmine
+
+== Support
+
+* *Issue Tracker*: https://www.redmine.org/projects/redmine/issues
+* *Forums*: https://www.redmine.org/projects/redmine/boards
+* *Wiki*: https://www.redmine.org/projects/redmine/wiki
