@@ -4,11 +4,8 @@
 /.loadpath
 /.powrc
 /.rvmrc
-/.ruby-version
 /.byebug_history
 /config/additional_environment.rb
-/config/configuration.yml
-/config/database.yml
 /config/email.yml
 /config/secrets.yml
 /config/initializers/session_store.rb
@@ -17,7 +14,6 @@
 /db/*.db
 /db/*.sqlite3
 /db/*.sqlite3-*
-/db/schema.rb
 /files/*
 /lib/redmine/scm/adapters/mercurial/redminehelper.pyc
 /lib/redmine/scm/adapters/mercurial/redminehelper.pyo
@@ -41,8 +37,17 @@
 *.rbc
 
 /.bundle
-/Gemfile.lock
-/Gemfile.local
 
 /node_modules
 yarn-error.log
+
+/config/master.key
+/storage/*
+
+# Ignore OSX
+.DS_Store
+.idea
+
+# Kamal secrets and environment files
+.env
+.kamal/secrets

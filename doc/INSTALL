@@ -49,11 +49,22 @@ The current version of Firefox, Safari, Chrome, Chromium and Microsoft Edge.
 5. Generate a session store secret
 
    Redmine stores session data in cookies by default, which requires
-   a secret to be generated. Under the application main directory run:
+   a secret to be generated. You have several options:
+
+   Option A: Use Rails credentials (recommended for Rails 5.2+):
+     EDITOR=vi bundle exec rails credentials:edit
+   
+   This will create or edit config/credentials.yml.enc and generate a master key.
+   Add the following to your credentials file:
+     secret_key_base: your_generated_secret_here
+   
+   Option B: Use the legacy secret token generator:
      bundle exec rake generate_secret_token
 
-   Alternatively, you can store this secret in config/secrets.yml:
+   Option C: Store the secret in config/secrets.yml:
    https://guides.rubyonrails.org/upgrading_ruby_on_rails.html#config-secrets-yml
+
+   Note: Rails credentials provide better security by encrypting secrets at rest.
 
 6. Compile assets (optional)
 

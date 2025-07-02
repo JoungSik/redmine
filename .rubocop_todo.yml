@@ -133,6 +133,7 @@ Layout/SpaceAroundOperators:
 # SupportedStylesForEmptyBrackets: space, no_space
 Layout/SpaceInsideArrayLiteralBrackets:
   Exclude:
+    - 'Gemfile'
     - 'app/models/query.rb'
     - 'lib/redmine/string_array_diff/diff.rb'
     - 'test/unit/mailer_localisation_test.rb'

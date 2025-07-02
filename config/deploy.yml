@@ -1,0 +1,35 @@
+# config/deploy.yml
+
+service: redmine
+image: joungsik/redmine
+
+servers:
+  web:
+    hosts:
+      - <%= ENV.fetch("SSH_HOST") %>
+
+registry:
+  server: ghcr.io
+  username: <%= ENV.fetch("REGISTRY_USER") %>
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+env:
+  secret:
+    - RAILS_MASTER_KEY
+
+volumes:
+  - /home/joungsik/workspace/redmine_data:/data
+  - /home/joungsik/workspace/redmine_storage:/storage
+  - /home/joungsik/workspace/redmine_plugins:/rails/plugins
+  - /home/joungsik/workspace/redmine_repositories:/gitrepo
+
+proxy:
+  ssl: true
+  host: redmine.joungsik.com
+
+builder:
+  arch: amd64
+
+ssh:
+  user: <%= ENV.fetch("SSH_USER") %>

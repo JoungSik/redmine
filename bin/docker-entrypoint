@@ -1,0 +1,24 @@
+#!/bin/bash -e
+
+# Enable jemalloc for reduced memory usage and latency.
+if [ -z "${LD_PRELOAD+x}" ]; then
+    LD_PRELOAD=$(find /usr/lib -name libjemalloc.so.2 -print -quit)
+    export LD_PRELOAD
+fi
+
+# If running the rails server then create or migrate existing database
+if [ "${1}" == "./bin/thrust" ] && [ "${2}" == "./bin/rails" ] && [ "${3}" == "server" ]; then
+  # Check if plugins added new dependencies
+  if [ -d "plugins" ] && [ "$(ls -A plugins)" ]; then
+    echo "Plugins detected, checking for new dependencies..."
+    bundle config set frozen false
+    bundle config set cache_path /tmp/bundle_cache
+    bundle install --quiet --jobs=4 --no-cache
+    ./bin/rake assets:precompile
+  fi
+
+  ./bin/rails db:migrate
+  ./bin/rake redmine:plugins:migrate
+fi
+
+exec "${@}"
