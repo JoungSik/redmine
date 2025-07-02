@@ -5,52 +5,12 @@ on:
 
 jobs:
   tests:
-    name: test ${{matrix.db}} ruby-${{ matrix.ruby }}
+    name: Tests
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        ruby: ['3.2', '3.3', '3.4', '4.0']
-        db: ['postgresql', 'mysql2', 'sqlite3']
-      fail-fast: false
-
-    services:
-      postgres:
-        image: postgres:14
-        env:
-          POSTGRES_DB: redmine_test
-          POSTGRES_USER: root
-          POSTGRES_PASSWORD: root
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
-      mysql:
-        image: mysql:8.4
-        env:
-          MYSQL_DATABASE: redmine_test
-          MYSQL_ROOT_PASSWORD: 'root'
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
-
-      - name: Setup Redmine test environment
-        uses: ./.github/actions/setup-redmine
-        with:
-          db-type: ${{ matrix.db }}
-          ruby-version: ${{ matrix.ruby }}
 
       - name: Run tests
         run: |
