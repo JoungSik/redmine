@@ -63,7 +63,7 @@ COPY --from=build /rails /rails
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
     mkdir -p storage files tmp/cache tmp/pids tmp/sockets tmp/imports tmp/thumbnails tmp/test data && \
-    chown -R rails:rails db log storage tmp files data
+    chown -R rails:rails /rails "${BUNDLE_PATH}"
 USER 1000:1000
 
 # Entrypoint prepares the database.
