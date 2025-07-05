@@ -20,6 +20,7 @@ env:
 
 volumes:
   - /home/joungsik/workspace/redmine_data:/data
+  - /home/joungsik/workspace/redmine_plugins:/rails/plugins
 
 proxy:
   ssl: true
