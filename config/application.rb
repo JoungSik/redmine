@@ -34,7 +34,7 @@ module RedmineApp
     config.active_support.cache_format_version = 7.0
 
     config.active_record.store_full_sti_class = true
-    config.active_record.default_timezone = :local
+    config.active_record.default_timezone = :utc
     config.active_record.yaml_column_permitted_classes = [
       Date,
       Time,
