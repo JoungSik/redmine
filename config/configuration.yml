@@ -20,8 +20,8 @@ default:
       port: 587
       domain: "gmail.com" # 'your.domain.com' for GoogleApps
       authentication: :plain
-      user_name: Rails.application.credentials.dig(:smtp, :user_name)
-      password: Rails.application.credentials.dig(:smtp, :password)
+      user_name: <%= Rails.application.credentials.dig(:smtp, :user_name) %>
+      password: <%= Rails.application.credentials.dig(:smtp, :password) %>
 
   # ==== Simple SMTP server at localhost
   #
