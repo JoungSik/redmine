@@ -21,6 +21,7 @@ env:
 volumes:
   - /home/joungsik/workspace/redmine_data:/data
   - /home/joungsik/workspace/redmine_plugins:/rails/plugins
+  - /home/joungsik/workspace/redmine_repositories:/gitrepo
 
 proxy:
   ssl: true
