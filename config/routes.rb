@@ -25,6 +25,10 @@ Rails.application.routes.draw do
   root :to => 'welcome#index'
   root :to => 'welcome#index', :as => 'home'
 
+  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
+  get "manifest" => "rails/pwa#manifest", :as => :pwa_manifest
+  get "service-worker" => "rails/pwa#service_worker", :as => :pwa_service_worker
+
   match 'login', :to => 'account#login', :as => 'signin', :via => [:get, :post]
   match 'logout', :to => 'account#logout', :as => 'signout', :via => [:get, :post]
   match 'account/twofa/confirm', :to => 'account#twofa_confirm', :via => :get
