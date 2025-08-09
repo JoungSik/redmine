@@ -54,11 +54,8 @@ group :minimagick do
   gem 'mini_magick', '~> 5.2.0'
 end
 
-# Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
-gem "kamal", require: false
-
-# Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
-gem "thruster", require: false
+# Cron job scheduler [https://github.com/javan/whenever]
+gem "whenever", require: false
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
