@@ -7,6 +7,9 @@ servers:
   web:
     hosts:
       - <%= ENV.fetch("SSH_HOST") %>
+    proxy: false
+
+env:
 
 registry:
   server: ghcr.io
