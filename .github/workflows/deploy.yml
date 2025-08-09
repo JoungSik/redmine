@@ -52,6 +52,6 @@ jobs:
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
-          KAMAL_VERSION: latest
+          KAMAL_VERSION: ${{ github.run_number }}
         run: |
           kamal deploy
