@@ -1,6 +1,6 @@
 # config/deploy.yml
 
-service: redmine
+service: redmine-app
 image: joungsik/redmine
 
 servers:
@@ -8,8 +8,6 @@ servers:
     hosts:
       - <%= ENV.fetch("SSH_HOST") %>
     proxy: false
-
-env:
 
 registry:
   server: ghcr.io
