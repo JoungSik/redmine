@@ -17,7 +17,7 @@ gem 'rbpdf', '~> 1.21.4', require: false
 gem 'addressable'
 gem 'rubyzip', '~> 3.7.0'
 gem 'propshaft', '~> 1.3.0'
-gem 'rack', '>= 3.1.3'
+gem 'rack', '>= 3.2.3'
 gem "stimulus-rails", "~> 1.3"
 gem "importmap-rails", "~> 2.0"
 gem 'commonmarker', '2.10.0'
@@ -32,6 +32,8 @@ gem 'net-imap', '~> 0.6.1'
 gem 'net-pop', '~> 0.1.2'
 gem 'net-smtp', '~> 0.5.1'
 gem 'ostruct'
+gem 'rexml', '~> 3.4.2'
+gem 'uri', '>= 1.0.4'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [ :mingw, :x64_mingw, :mswin ]
@@ -55,6 +57,9 @@ end
 
 # Cron job scheduler [https://github.com/javan/whenever]
 gem "whenever", require: false
+
+# Security updates for indirect dependencies
+gem 'thor', '~> 1.4.0'
 
 # Include database gems for the adapters found in the database
 # configuration file
@@ -107,7 +112,7 @@ group :development do
   gem 'listen', '~> 3.3'
   gem 'yard', require: false
   gem 'svg_sprite', require: false
-  gem 'bullet'
+  gem 'bullet', '~> 8.1'
 end
 
 group :test do
