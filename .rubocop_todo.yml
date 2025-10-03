@@ -598,7 +598,6 @@ Rails/WhereNot:
 
 Security/Eval:
   Exclude:
-    - 'app/helpers/attachments_helper.rb'
     - 'app/models/user.rb'
     - 'config/initializers/00-core_plugins.rb'
 
@@ -726,10 +725,6 @@ Style/CombinableLoops:
 Style/ConditionalAssignment:
   Enabled: false
 
-Style/DocumentDynamicEvalDefinition:
-  Exclude:
-    - 'app/helpers/attachments_helper.rb'
-
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
   Enabled: false
@@ -785,11 +780,6 @@ Style/EmptyElse:
 # SupportedStyles: compact, expanded
 Style/EmptyMethod:
   Enabled: false
-
-# This cop supports safe autocorrection (--autocorrect).
-Style/EvalWithLocation:
-  Exclude:
-    - 'app/helpers/attachments_helper.rb'
 
 # This cop supports safe autocorrection (--autocorrect).
 Style/ExpandPathArguments:
@@ -868,7 +858,6 @@ Style/IfUnlessModifierOfIfUnless:
 Style/IfWithBooleanLiteralBranches:
   Exclude:
     - 'app/controllers/workflows_controller.rb'
-    - 'app/helpers/application_helper.rb'
     - 'app/models/enumeration.rb'
     - 'app/models/query.rb'
     - 'lib/redmine/field_format.rb'
@@ -1064,7 +1053,6 @@ Style/RedundantBegin:
 Style/RedundantConditional:
   Exclude:
     - 'app/controllers/workflows_controller.rb'
-    - 'app/helpers/application_helper.rb'
     - 'app/models/enumeration.rb'
     - 'lib/redmine/field_format.rb'
 
