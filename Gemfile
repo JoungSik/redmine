@@ -9,13 +9,13 @@ gem "actionpack-xml_parser"
 gem 'roadie-rails', '~> 3.4.0'
 gem 'marcel'
 gem 'mail', '~> 2.9.0'
-gem 'nokogiri', '~> 1.18.3'
+gem 'nokogiri', '~> 1.18.9'
 gem 'i18n', '~> 1.14.1'
 gem 'rbpdf', '~> 1.21.4'
 gem 'addressable'
 gem 'rubyzip', '~> 3.2.2'
 gem 'propshaft', '~> 1.3.0'
-gem 'rack', '>= 3.1.3'
+gem 'rack', '>= 3.2.3'
 gem "stimulus-rails", "~> 1.3"
 gem "importmap-rails", "~> 2.0"
 gem 'commonmarker', '~> 2.6.0'
@@ -30,6 +30,8 @@ gem 'net-imap', '~> 0.6.1'
 gem 'net-pop', '~> 0.1.2'
 gem 'net-smtp', '~> 0.5.1'
 gem 'ostruct'
+gem 'rexml', '~> 3.4.2'
+gem 'uri', '>= 1.0.4'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [ :mingw, :x64_mingw, :mswin ]
@@ -59,6 +61,9 @@ gem "whenever", require: false
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
+
+# Security updates for indirect dependencies
+gem 'thor', '~> 1.4.0'
 
 # Include database gems for the adapters found in the database
 # configuration file

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_11_092227) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_07_073256) do
   create_table "attachments", force: :cascade do |t|
     t.integer "container_id"
     t.string "container_type", limit: 30
@@ -448,6 +448,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_11_092227) do
     t.index ["project_id"], name: "projects_trackers_project_id"
   end
 
+  create_table "projects_webhooks", force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.integer "webhook_id", null: false
+    t.index ["project_id"], name: "index_projects_webhooks_on_project_id"
+    t.index ["webhook_id"], name: "index_projects_webhooks_on_webhook_id"
+  end
+
   create_table "queries", force: :cascade do |t|
     t.integer "project_id"
     t.string "name", default: "", null: false
@@ -620,6 +627,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_11_092227) do
     t.index ["user_id", "watchable_type"], name: "watchers_user_id_type"
     t.index ["user_id"], name: "index_watchers_on_user_id"
     t.index ["watchable_id", "watchable_type"], name: "index_watchers_on_watchable_id_and_watchable_type"
+  end
+
+  create_table "webhooks", force: :cascade do |t|
+    t.string "url", limit: 2000, null: false
+    t.string "secret"
+    t.text "events"
+    t.integer "user_id", null: false
+    t.boolean "active", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["active"], name: "index_webhooks_on_active"
+    t.index ["user_id"], name: "index_webhooks_on_user_id"
   end
 
   create_table "wiki_content_versions", force: :cascade do |t|
