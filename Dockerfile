@@ -14,10 +14,13 @@ FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 # Rails app lives here
 WORKDIR /rails
 
-# Install base packages
+# Install base packages and supercronic
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 git cron && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+    apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 git && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives && \
+    curl -fsSLO "https://github.com/aptible/supercronic/releases/download/v0.2.33/supercronic-linux-amd64" && \
+    chmod +x supercronic-linux-amd64 && \
+    mv supercronic-linux-amd64 /usr/local/bin/supercronic
 
 # Set production environment
 ENV RAILS_ENV="production" \
