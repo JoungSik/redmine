@@ -15,7 +15,7 @@ gem 'rbpdf', '~> 1.21.4'
 gem 'addressable'
 gem 'rubyzip', '~> 3.1.1'
 gem 'propshaft', '~> 1.3.0'
-gem 'rack', '>= 3.1.3'
+gem 'rack', '>= 3.2.3'
 gem "stimulus-rails", "~> 1.3"
 gem "importmap-rails", "~> 2.0"
 gem 'commonmarker', '~> 2.5.0'
@@ -30,6 +30,7 @@ gem 'net-imap', '~> 0.5.7'
 gem 'net-pop', '~> 0.1.2'
 gem 'net-smtp', '~> 0.5.0'
 gem 'rexml', '~> 3.4.2'
+gem 'uri', '>= 1.0.4'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [ :mingw, :x64_mingw, :mswin ]
