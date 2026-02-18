@@ -11,7 +11,7 @@ Redmine - Ruby on Rails 기반의 프로젝트 관리 및 이슈 추적 웹 애�
 - **Frontend**: ERB 뷰 + Stimulus (importmap-rails) + jQuery
 - **Asset Pipeline**: Propshaft
 - **테스트**: Minitest + Mocha + Capybara + Selenium (RSpec 아님)
-- **배포**: Docker + Kamal
+- **배포**: Docker (GHCR) + GitHub Actions
 
 ## 주요 명령어
 
@@ -108,4 +108,4 @@ safe_attributes 'isbn', :if => {|book, user| book.author == user}
 
 - **linters.yml**: RuboCop (병렬), Stylelint, bundle-audit
 - **tests.yml**: 테스트 실행
-- **deploy.yml**: Kamal 배포
+- **deploy.yml**: Docker 빌드 → GHCR push → Slack 알림

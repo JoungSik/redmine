@@ -3,7 +3,7 @@
 ## Ruby 코드 스타일 (RuboCop)
 - **frozen_string_literal**: 항상 사용 (`# frozen_string_literal: true`), db/ 및 설정 파일 제외
 - **Target Ruby**: 3.2+
-- **Target Rails**: 7.2+
+- **Target Rails**: 7.2+ (.rubocop.yml 기준, 실제 Rails 8.0.4)
 - **Metrics**: 비활성화됨 (메서드 길이 등 제한 없음)
 - **Hash 문법**: `no_mixed_keys` 스타일, shorthand는 `either` 허용
 - **네이밍**: AccessorMethodName, BinaryOperatorParameterName, PredicateMethod 규칙 비활성화

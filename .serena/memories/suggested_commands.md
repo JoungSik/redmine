@@ -34,8 +34,8 @@ bin/rails db:rollback               # 마지막 마이그레이션 롤백
 
 ## Docker / 배포
 ```bash
-docker build -t redmine .           # Docker 이미지 빌드
-kamal deploy                        # Kamal로 배포
+docker build -t redmine .           # Docker 이미지 빌드 (로컬)
+# 배포는 GitHub Actions (deploy.yml)에서 GHCR로 자동 빌드/push
 ```
 
 ## 유틸리티 (macOS/Darwin)

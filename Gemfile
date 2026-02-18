@@ -59,9 +59,6 @@ end
 # Cron job scheduler [https://github.com/javan/whenever]
 gem "whenever", require: false
 
-# Cron job scheduler [https://github.com/javan/whenever]
-gem "whenever", require: false
-
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
