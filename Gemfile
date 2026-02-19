@@ -116,7 +116,7 @@ group :development do
   gem 'listen', '~> 3.3'
   gem 'yard', require: false
   gem 'svg_sprite', require: false
-  gem 'bullet'
+  gem 'bullet', '~> 8.1'
 end
 
 group :test do
