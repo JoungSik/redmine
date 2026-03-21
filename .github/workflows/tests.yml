@@ -12,6 +12,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
+      - name: Setup Redmine test environment
+        uses: ./.github/actions/setup-redmine
+        with:
+          db-type: sqlite3
+          ruby-version: '3.4'
+
       - name: Run tests
         run: |
           bin/rails test
@@ -39,7 +45,7 @@ jobs:
         uses: ./.github/actions/setup-redmine
         with:
           db-type: sqlite3
-          ruby-version: '4.0'
+          ruby-version: '3.4'
 
       # System tests use Chrome and ChromeDriver installed on the GitHub Actions Ubuntu image.
       # They are generally updated to the latest stable versions.
