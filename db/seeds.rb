@@ -5,27 +5,26 @@
 # 주의: development 환경에서만 실행 가능
 
 unless Rails.env.development?
-  abort "⛔ 이 시드는 development 환경에서만 실행할 수 있습니다. (현재: #{Rails.env})"
+  abort "이 시드는 development 환경에서만 실행할 수 있습니다. (현재: #{Rails.env})"
 end
 
-puts "=== Redmine 개발용 시드 데이터 생성 시작 (#{Rails.env}) ==="
+Rails.logger.info "=== Redmine 개발용 시드 데이터 생성 시작 (#{Rails.env}) ==="
 
 # 1. 기본 데이터 로드 (트래커, 상태, 우선순위, 역할, 워크플로우 등)
-include Redmine::I18n
 lang = ENV.fetch('REDMINE_LANG', 'ko')
-set_language_if_valid(lang)
+Redmine::I18n.set_language_if_valid(lang)
 
 begin
   Redmine::DefaultData::Loader.load(lang)
-  puts "✓ 기본 데이터 로드 완료 (#{lang})"
+  Rails.logger.info "기본 데이터 로드 완료 (#{lang})"
 rescue Redmine::DefaultData::DataAlreadyLoaded
-  puts "- 기본 데이터 이미 존재, 건너뜀"
+  Rails.logger.info "기본 데이터 이미 존재, 건너뜀"
 end
 
 # 2. 관리자 계정 확인
 admin = User.find_by(login: 'admin')
 if admin
-  puts "- 관리자 계정 이미 존재 (admin)"
+  Rails.logger.info "관리자 계정 이미 존재 (admin)"
 else
   admin = User.new(
     login: 'admin',
@@ -39,7 +38,7 @@ else
   admin.password = 'password'
   admin.password_confirmation = 'password'
   admin.save!
-  puts "✓ 관리자 계정 생성 (admin@example.com / password)"
+  Rails.logger.info "관리자 계정 생성 (admin@example.com / password)"
 end
 
 User.current = admin
@@ -60,7 +59,7 @@ users = users_data.map do |data|
     user.password = 'password'
     user.password_confirmation = 'password'
     user.save!
-    puts "✓ 사용자 생성: #{data[:login]}"
+    Rails.logger.info "사용자 생성: #{data[:login]}"
   end
   user
 end
@@ -128,7 +127,7 @@ projects = projects_data.map do |data|
     project.enable_module!('calendar')
     project.enable_module!('gantt')
     project.save!
-    puts "✓ 프로젝트 생성: #{data[:name]}"
+    Rails.logger.info "프로젝트 생성: #{data[:name]}"
   end
   project
 end
@@ -149,7 +148,7 @@ unless sub_project
   sub_project.trackers = trackers
   sub_project.enable_module!('issue_tracking')
   sub_project.save!
-  puts "✓ 서브 프로젝트 생성: API 서버"
+  Rails.logger.info "서브 프로젝트 생성: API 서버"
 end
 
 # 8. 멤버 배정
@@ -179,7 +178,7 @@ add_member(mobile_project, des1, role_developer)
 add_member(infra_project, mgr1, role_manager)
 add_member(infra_project, dev1, role_developer)
 
-puts "✓ 멤버 배정 완료"
+Rails.logger.info "멤버 배정 완료"
 
 # 9. 버전 (마일스톤) 생성
 versions_data = [
@@ -192,14 +191,12 @@ versions_data = [
 versions = versions_data.map do |data|
   project = data.delete(:project)
   version = project.versions.find_by(name: data[:name])
-  unless version
-    version = project.versions.create!(data)
-  end
+  version ||= project.versions.create!(data)
   version
 end
-puts "✓ 버전 생성 완료"
+Rails.logger.info "버전 생성 완료"
 
-web_v1, web_v11, web_v09, mobile_v1 = versions
+web_v1, web_v11, _web_v09, mobile_v1 = versions
 
 # 10. 이슈 카테고리
 categories_data = [
@@ -215,7 +212,7 @@ categories = categories_data.map do |data|
   cat = project.issue_categories.find_by(name: data[:name])
   cat || project.issue_categories.create!(data)
 end
-puts "✓ 이슈 카테고리 생성 완료"
+Rails.logger.info "이슈 카테고리 생성 완료"
 
 cat_backend, cat_frontend, cat_uiux, cat_ios, cat_android = categories
 
@@ -227,7 +224,8 @@ support_tracker = trackers[2]
 issues_data = [
   # 웹 서비스 - 버그
   {project: web_project, tracker: bug_tracker, subject: '로그인 페이지에서 비밀번호 재설정 링크 동작 안 함',
-   description: "비밀번호 재설정 링크를 클릭하면 404 에러가 발생합니다.\n\n## 재현 순서\n1. 로그인 페이지 접속\n2. '비밀번호를 잊으셨나요?' 클릭\n3. 404 에러 페이지 표시",
+   description: "비밀번호 재설정 링크를 클릭하면 404 에러가 발생합니다.\n\n## 재현 순서\n" \
+                "1. 로그인 페이지 접속\n2. '비밀번호를 잊으셨나요?' 클릭\n3. 404 에러 페이지 표시",
    priority: priority_urgent, status: status_progress, assigned_to: dev1, category: cat_backend,
    fixed_version: web_v1, start_date: 5.days.ago, due_date: 2.days.from_now, done_ratio: 60},
 
@@ -248,7 +246,8 @@ issues_data = [
 
   # 웹 서비스 - 기능 요청
   {project: web_project, tracker: feature_tracker, subject: '다크모드 지원',
-   description: "사용자 설정에서 다크모드를 선택할 수 있도록 UI 테마 기능을 추가합니다.\n\n## 요구사항\n- OS 설정 연동 (자동)\n- 수동 전환 토글\n- 커스텀 색상 팔레트",
+   description: "사용자 설정에서 다크모드를 선택할 수 있도록 UI 테마 기능을 추가합니다.\n\n## 요구사항\n" \
+                "- OS 설정 연동 (자동)\n- 수동 전환 토글\n- 커스텀 색상 팔레트",
    priority: priority_normal, status: status_progress, assigned_to: des1, category: cat_uiux,
    fixed_version: web_v11, start_date: 3.days.ago, due_date: 20.days.from_now, done_ratio: 30},
 
@@ -309,7 +308,8 @@ issues_data = [
    start_date: Date.today, due_date: 20.days.from_now, done_ratio: 0},
 
   {project: infra_project, tracker: support_tracker, subject: 'SSL 인증서 갱신 (4월 만료 예정)',
-   description: "메인 도메인의 SSL 인증서가 4월에 만료됩니다. Let's Encrypt 자동 갱신 설정을 확인해주세요.",
+   description: "메인 도메인의 SSL 인증서가 4월에 만료됩니다. " \
+                "Let's Encrypt 자동 갱신 설정을 확인해주세요.",
    priority: priority_high, status: status_new, assigned_to: dev1,
    due_date: 15.days.from_now, done_ratio: 0},
 ]
@@ -334,7 +334,7 @@ issues_data.each do |data|
   issue.fixed_version = fixed_version
   issue.save!
 end
-puts "✓ 이슈 #{issues_data.size}건 생성 완료"
+Rails.logger.info "이슈 #{issues_data.size}건 생성 완료"
 
 # 12. 이슈에 코멘트 추가
 issues_with_notes = Issue.where(project: [web_project, mobile_project]).where.not(assigned_to_id: nil).limit(8)
@@ -350,19 +350,28 @@ notes_samples = [
 ]
 
 issues_with_notes.each_with_index do |issue, i|
-  journal = issue.init_journal(users.sample, notes_samples[i])
+  issue.init_journal(users.sample, notes_samples[i])
   issue.save!
 end
-puts "✓ 이슈 코멘트 추가 완료"
+Rails.logger.info "이슈 코멘트 추가 완료"
 
 # 13. 위키 페이지 생성
 [web_project, mobile_project].each do |project|
   wiki = project.wiki || Wiki.create!(project: project, start_page: 'Wiki')
 
   pages_data = [
-    {title: 'Wiki', content: "# #{project.name} 위키\n\n프로젝트 문서 모음입니다.\n\n## 목차\n\n- [[개발 가이드]]\n- [[배포 절차]]"},
-    {title: '개발_가이드', content: "# 개발 가이드\n\n## 환경 설정\n\n```bash\ngit clone <repo-url>\ncd project\nbundle install\nbin/rails db:setup\nbin/rails server\n```\n\n## 코딩 컨벤션\n\n- Ruby Style Guide 준수\n- 테스트 커버리지 80% 이상 유지\n- PR 리뷰 필수"},
-    {title: '배포_절차', content: "# 배포 절차\n\n## 스테이징 배포\n1. `main` 브랜치에서 `staging` 브랜치로 머지\n2. CI 파이프라인 통과 확인\n3. 스테이징 환경에서 QA 테스트\n\n## 프로덕션 배포\n1. 릴리스 태그 생성\n2. 배포 스크립트 실행\n3. 헬스체크 확인"},
+    {title: 'Wiki',
+     content: "# #{project.name} 위키\n\n프로젝트 문서 모음입니다.\n\n## 목차\n\n" \
+              "- [[개발 가이드]]\n- [[배포 절차]]"},
+    {title: '개발_가이드',
+     content: "# 개발 가이드\n\n## 환경 설정\n\n```bash\ngit clone <repo-url>\ncd project\n" \
+              "bundle install\nbin/rails db:setup\nbin/rails server\n```\n\n## 코딩 컨벤션\n\n" \
+              "- Ruby Style Guide 준수\n- 테스트 커버리지 80% 이상 유지\n- PR 리뷰 필수"},
+    {title: '배포_절차',
+     content: "# 배포 절차\n\n## 스테이징 배포\n" \
+              "1. `main` 브랜치에서 `staging` 브랜치로 머지\n" \
+              "2. CI 파이프라인 통과 확인\n3. 스테이징 환경에서 QA 테스트\n\n" \
+              "## 프로덕션 배포\n1. 릴리스 태그 생성\n2. 배포 스크립트 실행\n3. 헬스체크 확인"},
   ]
 
   pages_data.each do |data|
@@ -376,12 +385,17 @@ puts "✓ 이슈 코멘트 추가 완료"
     end
   end
 end
-puts "✓ 위키 페이지 생성 완료"
+Rails.logger.info "위키 페이지 생성 완료"
 
 # 14. 뉴스 생성
 news_data = [
-  {project: web_project, title: 'v0.9.0 베타 릴리스 완료', description: "베타 버전이 릴리스되었습니다. 테스트 참여 부탁드립니다.\n\n주요 변경사항:\n- 사용자 인증 시스템 개선\n- 대시보드 UI 리뉴얼\n- API 응답 속도 개선", author: mgr1},
-  {project: mobile_project, title: '앱 디자인 시스템 가이드 공유', description: "Figma로 작성된 디자인 시스템 가이드를 공유합니다. 컴포넌트 사용 시 참고해주세요.", author: des1},
+  {project: web_project, title: 'v0.9.0 베타 릴리스 완료',
+   description: "베타 버전이 릴리스되었습니다. 테스트 참여 부탁드립니다.\n\n주요 변경사항:\n" \
+                "- 사용자 인증 시스템 개선\n- 대시보드 UI 리뉴얼\n- API 응답 속도 개선",
+   author: mgr1},
+  {project: mobile_project, title: '앱 디자인 시스템 가이드 공유',
+   description: "Figma로 작성된 디자인 시스템 가이드를 공유합니다. 컴포넌트 사용 시 참고해주세요.",
+   author: des1},
 ]
 
 news_data.each do |data|
@@ -390,9 +404,9 @@ news_data.each do |data|
     project.news.create!(data)
   end
 end
-puts "✓ 뉴스 생성 완료"
+Rails.logger.info "뉴스 생성 완료"
 
-puts "\n=== 시드 데이터 생성 완료 ==="
-puts "  관리자: admin@example.com / password"
-puts "  사용자: developer1, developer2, manager1, reporter1, designer1 / password"
-puts "  프로젝트: web-service, mobile-app, infra"
+Rails.logger.info "=== 시드 데이터 생성 완료 ==="
+Rails.logger.info "  관리자: admin@example.com / password"
+Rails.logger.info "  사용자: developer1, developer2, manager1, reporter1, designer1 / password"
+Rails.logger.info "  프로젝트: web-service, mobile-app, infra"
