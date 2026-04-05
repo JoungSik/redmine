@@ -1,0 +1,1052 @@
+/**
+ * Redmine Modern Theme
+ * Copyright (C) 2026 JoungSik
+ * This code is released under the GNU General Public License.
+ *
+ * Open Color 변수 체계를 활용한 다크테마 오버라이드
+ */
+
+@import url(/application.css);
+
+/* 브라우저 기본 UI (스크롤바 등) 다크 적용 */
+:root {
+  color-scheme: dark;
+}
+
+/***** 레이아웃 *****/
+
+html, body {
+  background-color: var(--oc-gray-9);
+}
+
+body {
+  color: var(--oc-gray-1);
+}
+
+#wrapper {
+  background: var(--oc-gray-9);
+}
+
+#top-menu {
+  background: var(--oc-gray-9);
+  border-block-end: 1px solid var(--oc-gray-7);
+}
+
+#header {
+  background: linear-gradient(180deg, var(--oc-gray-8) 30%, #1a1d21);
+  color: var(--oc-gray-1);
+  min-block-size: 6ex;
+  padding-block: 4px 14px;
+}
+#header a { color: var(--oc-gray-1); }
+#header h1 { font-size: 1.125rem; }
+#header h1 .breadcrumbs { font-size: 0.7rem; }
+
+#content {
+  background-color: var(--oc-gray-8);
+  color: var(--oc-gray-1);
+}
+
+#content h1, h2, h3, h4, h5, h6 {
+  color: var(--oc-gray-2);
+}
+
+h4 {
+  border-block-end-color: var(--oc-gray-6);
+}
+
+#sidebar {
+  background: var(--oc-gray-9);
+  border-inline-start-color: var(--oc-gray-7);
+}
+#sidebar h3 { color: var(--oc-gray-3); }
+#sidebar hr { background: var(--oc-gray-7); }
+
+#sidebar-switch-button svg {
+  stroke: var(--oc-gray-3);
+}
+#sidebar-switch-button:hover {
+  background-color: var(--oc-gray-7);
+}
+
+#footer {
+  background: var(--oc-gray-9);
+  border-block-start-color: var(--oc-gray-7);
+  color: var(--oc-gray-5);
+}
+
+/***** 링크 *****/
+
+a, a:link, a:visited {
+  color: var(--oc-blue-4);
+}
+a:hover, a:active {
+  color: var(--oc-red-4);
+}
+
+a.issue.closed, a.issue.closed:link, a.issue.closed:visited,
+a.project.closed, a.project.closed:link, a.project.closed:visited,
+a.user.locked, a.user.locked:link, a.user.locked:visited {
+  color: var(--oc-gray-5);
+}
+
+a.user.user-mention {
+  background-color: rgba(var(--oc-blue-9-rgb), 0.3);
+}
+
+#sidebar a.selected {
+  background-color: rgba(var(--oc-blue-4-rgb), 0.5);
+}
+
+/***** 드롭다운 *****/
+
+.drdn-content {
+  background-color: var(--oc-gray-8);
+  border-color: var(--oc-gray-6);
+  color: var(--oc-gray-2);
+}
+.drdn-items > * {
+  border-color: var(--oc-gray-8);
+}
+div + .drdn-items {
+  border-block-start-color: var(--oc-gray-6);
+}
+.drdn-items > span { color: var(--oc-gray-4); }
+
+.contextual .drdn-items > a:hover,
+.journal-actions .drdn-items > a:hover {
+  color: var(--oc-blue-4);
+  border-color: var(--oc-blue-6);
+  background-color: rgba(var(--oc-blue-9-rgb), 0.2);
+}
+
+#project-jump .drdn-trigger {
+  border-color: var(--oc-gray-6);
+  color: var(--oc-gray-2);
+  background-color: var(--oc-gray-7);
+}
+#project-jump .drdn-items > * { color: var(--oc-gray-2); }
+#project-jump .drdn-items > a:hover {
+  background-color: var(--oc-blue-7);
+  color: var(--oc-white);
+}
+
+/***** 테이블 *****/
+
+/* 일감 목록 테이블 좌우 스크롤 (autoscroll 컨테이너 내부만) */
+.autoscroll table.list {
+  min-inline-size: 800px;
+}
+
+table.list, .table-list {
+  border-block-start-color: var(--oc-gray-6);
+  border-block-end-color: var(--oc-gray-6);
+}
+table.list th, .table-list-header {
+  background-color: var(--oc-gray-7);
+  border-block-end-color: var(--oc-gray-6);
+  color: var(--oc-gray-2);
+}
+table.list td {
+  border-block-start-color: var(--oc-gray-7);
+}
+
+/* 줄무늬 행 */
+.box table.list:not(.odd-even) tbody tr:nth-child(even), .box .even,
+table.list:not(.odd-even) tbody tr:nth-child(odd), .odd {
+  background-color: var(--oc-gray-8);
+}
+table.list:not(.odd-even) tbody tr:nth-child(even), .even {
+  background-color: var(--oc-gray-9);
+}
+table.list:not(.odd-even) tbody tr:nth-child(odd):hover, .odd:hover,
+table.list:not(.odd-even) tbody tr:nth-child(even):hover, .even:hover {
+  background-color: rgba(var(--oc-blue-9-rgb), 0.15);
+}
+
+tr.group td {
+  border-block-end-color: var(--oc-gray-6);
+  background-color: var(--oc-gray-8);
+}
+tr.group span.totals { color: var(--oc-gray-4); }
+tr.group span.totals .value { color: var(--oc-gray-3); }
+tr.group a.toggle-all { color: var(--oc-gray-4); }
+
+table.issue-report tr.total,
+table.issue-report-detailed tr.total {
+  border-block-start-color: var(--oc-gray-6);
+}
+
+tr.project.closed, tr.project.archived,
+tr.project.closed a, tr.project.archived a {
+  color: var(--oc-gray-5);
+}
+
+tr.user.locked, tr.user.registered,
+tr.user.locked a, tr.user.registered a {
+  color: var(--oc-gray-5);
+}
+
+table.permissions td.role { color: var(--oc-gray-4); }
+table.issues td.block_column { color: var(--oc-gray-4); }
+
+tr.version.closed, tr.version.closed a { color: var(--oc-gray-5); }
+
+/***** 폼 요소 *****/
+
+input, select, textarea, button {
+  color: var(--oc-gray-1);
+  background-color: var(--oc-gray-7);
+  border-color: var(--oc-gray-6);
+}
+
+select {
+  background-color: var(--oc-gray-7);
+}
+
+select[multiple=multiple] {
+  background-color: var(--oc-gray-7);
+}
+
+input[type="submit"], button[type="submit"] {
+  background-color: var(--oc-gray-7);
+  color: var(--oc-gray-1);
+}
+input[type="submit"]:hover, button[type="submit"]:hover {
+  background-color: var(--oc-gray-6);
+}
+
+input:disabled, select:disabled, textarea:disabled {
+  background-color: var(--oc-gray-8);
+  color: var(--oc-gray-5);
+}
+
+input[type="text"]:focus, input[type="text"]:active,
+input[type="password"]:focus, input[type="password"]:active,
+input[type="date"]:focus, input[type="date"]:active,
+input[type="number"]:focus, input[type="number"]:active,
+select:focus, select:active,
+textarea:focus, textarea:active {
+  border-color: var(--oc-blue-5);
+}
+
+fieldset { border-color: var(--oc-gray-6); }
+legend { color: var(--oc-gray-2); }
+hr { background: var(--oc-gray-7); }
+blockquote { border-inline-start-color: var(--oc-gray-6); }
+abbr, span.field-description[title] { border-block-end-color: var(--oc-gray-5); }
+
+/***** 박스 / 카드 *****/
+
+.box {
+  background-color: var(--oc-gray-7);
+  color: var(--oc-gray-2);
+  border-color: var(--oc-gray-6);
+}
+
+div.issue {
+  background: rgba(var(--oc-blue-9-rgb), 0.15);
+}
+div.issue div.subject p { color: var(--oc-gray-4); }
+div.issue .next-prev-links { color: var(--oc-gray-4); }
+
+div#sticky-issue-header {
+  background-color: var(--oc-gray-8);
+  border-block-end-color: var(--oc-gray-6);
+  box-shadow: 0 2px 6px rgba(var(--oc-black-rgb), 0.4);
+}
+
+/***** 하이라이트 *****/
+
+.highlight { background-color: rgba(var(--oc-yellow-9-rgb), 0.3); }
+.highlight.token-1 { background-color: rgba(var(--oc-red-9-rgb), 0.3); }
+.highlight.token-2 { background-color: rgba(var(--oc-green-9-rgb), 0.3); }
+.highlight.token-3 { background-color: rgba(var(--oc-violet-9-rgb), 0.3); }
+
+/***** 로그인 폼 *****/
+
+#login-form {
+  background-color: var(--oc-gray-7);
+  color: var(--oc-gray-1);
+}
+
+/***** 모달 *****/
+
+div.modal {
+  background: var(--oc-gray-8);
+  color: var(--oc-gray-1);
+}
+
+/***** 플래시 메시지 / nodata / warning *****/
+
+#errorExplanation, div.flash, .nodata, .warning, .conflict {
+  border-color: var(--oc-gray-6);
+}
+
+div.flash.notice {
+  background-color: rgba(var(--oc-green-9-rgb), 0.15);
+  border-color: var(--oc-green-8);
+  color: var(--oc-green-3);
+}
+div.flash.notice svg.icon-svg {
+  stroke: var(--oc-green-3);
+}
+
+div.flash.warning, .conflict {
+  background-color: rgba(var(--oc-yellow-9-rgb), 0.15);
+  border-color: var(--oc-yellow-8);
+  color: var(--oc-yellow-3);
+}
+div.flash.warning svg.icon-svg, .conflict svg.icon-svg {
+  stroke: var(--oc-yellow-3);
+}
+
+div.flash.error, #errorExplanation {
+  background-color: rgba(var(--oc-red-9-rgb), 0.15);
+  border-color: var(--oc-red-8);
+  color: var(--oc-red-3);
+}
+div.flash.error svg.icon-svg, #errorExplanation svg.icon-svg {
+  stroke: var(--oc-red-3);
+}
+
+.nodata, .warning {
+  background-color: rgba(var(--oc-yellow-9-rgb), 0.1);
+  border-color: var(--oc-gray-6);
+  color: var(--oc-gray-4);
+}
+
+/***** 위키 *****/
+
+.wiki h6 { color: var(--oc-gray-4); }
+
+div.wiki table, div.wiki td, div.wiki th {
+  border-color: var(--oc-gray-6);
+}
+
+div.wiki pre {
+  background-color: var(--oc-gray-9);
+  border-color: var(--oc-gray-7);
+}
+
+div.wiki pre .syntaxhl {
+  background: var(--oc-gray-9);
+}
+
+div.wiki *:not(pre)>code, div.wiki>code {
+  background: rgba(var(--oc-gray-1-rgb), 0.1);
+  color: var(--oc-gray-1);
+}
+
+div.wiki a.new { color: var(--oc-red-4); }
+
+div.wiki a:target + h1, div.wiki a:target + h2, div.wiki a:target + h3,
+div.wiki a:target + h4, div.wiki a:target + h5, div.wiki a:target + h6 {
+  background-color: rgba(var(--oc-blue-9-rgb), 0.2);
+}
+
+div.wiki ul.toc {
+  background-color: var(--oc-gray-7);
+  border-color: var(--oc-gray-6);
+}
+div.wiki ul.toc>li:first-child { color: var(--oc-gray-3); }
+div.wiki ul.toc a { color: var(--oc-gray-4); }
+div.wiki ul.toc a:hover { color: var(--oc-red-4); }
+
+a.wiki-anchor { color: var(--oc-gray-5); }
+h1:hover a.wiki-anchor, h2:hover a.wiki-anchor, h3:hover a.wiki-anchor,
+h4:hover a.wiki-anchor, h5:hover a.wiki-anchor, h6:hover a.wiki-anchor {
+  color: var(--oc-gray-5);
+}
+
+/* 마크다운 알림 블록 */
+.markdown-alert-warning .markdown-alert-title { color: var(--oc-orange-4); }
+.markdown-alert-warning .markdown-alert-title svg { stroke: var(--oc-orange-4); }
+.markdown-alert-caution .markdown-alert-title { color: var(--oc-yellow-4); }
+.markdown-alert-caution .markdown-alert-title svg { stroke: var(--oc-yellow-4); }
+.markdown-alert-important .markdown-alert-title { color: var(--oc-grape-4); }
+.markdown-alert-important .markdown-alert-title svg { stroke: var(--oc-grape-4); }
+.markdown-alert-note .markdown-alert-title { color: var(--oc-indigo-4); }
+.markdown-alert-note .markdown-alert-title svg { stroke: var(--oc-indigo-4); }
+
+/***** 코드 블록 *****/
+
+pre {
+  background-color: var(--oc-gray-9);
+  border: 1px solid var(--oc-gray-7);
+  color: var(--oc-gray-1);
+  border-radius: 3px;
+}
+
+code {
+  background-color: var(--oc-gray-7);
+  border-radius: 3px;
+  color: var(--oc-gray-1);
+}
+
+/***** 진행률 바 *****/
+
+table.progress {
+  background-color: var(--oc-gray-7);
+}
+table.progress td.closed {
+  background-color: var(--oc-green-7);
+}
+table.progress td.done {
+  background-color: var(--oc-blue-7);
+}
+table.progress td.open {
+  background-color: var(--oc-gray-6);
+}
+
+/***** 탭 *****/
+
+div.tabs ul {
+  border-block-end-color: var(--oc-gray-6);
+}
+div.tabs ul li a {
+  background-color: var(--oc-gray-8);
+  border-color: var(--oc-gray-6);
+  color: var(--oc-gray-3);
+}
+div.tabs ul li a:hover {
+  background-color: var(--oc-gray-7);
+}
+div.tabs ul li a.selected {
+  background-color: var(--oc-gray-8);
+  border-block-end-color: var(--oc-gray-8);
+  color: var(--oc-gray-1);
+}
+
+/***** 페이지네이션 *****/
+
+ul.pages li a {
+  border-color: var(--oc-gray-6);
+  background-color: var(--oc-gray-8);
+}
+ul.pages li a:hover {
+  background-color: var(--oc-gray-7);
+}
+
+/***** 툴팁 *****/
+
+div.tooltip .tip {
+  background: var(--oc-gray-7);
+  border-color: var(--oc-gray-6);
+  color: var(--oc-gray-1);
+}
+
+/***** 저널 (이슈 히스토리) *****/
+
+div.journal {
+  border-block-end-color: var(--oc-gray-7);
+}
+
+.journals h4.journal-header {
+  background-color: var(--oc-gray-7);
+}
+.journals div:target h4.journal-header {
+  background-color: rgba(var(--oc-blue-9-rgb), 0.2);
+}
+.journals .journal-meta .journal-link {
+  color: var(--oc-gray-4);
+}
+.journals .journal-details, ul.revision-info {
+  color: var(--oc-gray-4);
+}
+.journals .journal-details a, ul.revision-info a {
+  color: var(--oc-blue-4);
+}
+.journals .journal-details a:hover, ul.revision-info a:hover {
+  color: var(--oc-red-4);
+}
+
+div.journal .wiki {
+  color: var(--oc-gray-2);
+}
+div.journal .details {
+  color: var(--oc-gray-4);
+}
+
+/***** 자동완성 / 검색 입력 *****/
+
+input.autocomplete {
+  background-color: var(--oc-gray-7);
+}
+
+div.autocomplete {
+  background-color: var(--oc-gray-8);
+  border-color: var(--oc-gray-6);
+  color: var(--oc-gray-2);
+}
+div.autocomplete ul li.selected {
+  background-color: var(--oc-blue-7);
+  color: var(--oc-white);
+}
+
+/* jQuery UI 자동완성 */
+.ui-autocomplete, .ui-menu {
+  border-color: var(--oc-gray-6);
+  background-color: var(--oc-gray-8);
+}
+.ui-autocomplete .ui-menu-item > div, .ui-menu .ui-menu-item > div {
+  color: var(--oc-gray-2);
+}
+.ui-widget.ui-widget-content {
+  background-color: var(--oc-gray-8);
+  border-color: var(--oc-gray-6);
+  color: var(--oc-gray-2);
+}
+
+/* jQuery UI 다이얼로그 (팝업) */
+.ui-dialog {
+  background-color: var(--oc-gray-8);
+  border-color: var(--oc-gray-6);
+  color: var(--oc-gray-1);
+}
+.ui-dialog .ui-dialog-titlebar {
+  background-color: var(--oc-gray-7);
+  border-block-end-color: var(--oc-gray-6);
+  color: var(--oc-gray-2);
+}
+.ui-dialog .ui-dialog-titlebar-close {
+  background-color: var(--oc-gray-7);
+  border-color: var(--oc-gray-6);
+}
+.ui-dialog .ui-dialog-titlebar-close:hover {
+  background-color: var(--oc-gray-6);
+}
+.ui-dialog .ui-dialog-content {
+  background-color: var(--oc-gray-8);
+  color: var(--oc-gray-1);
+}
+.ui-dialog .ui-dialog-buttonpane {
+  background-color: var(--oc-gray-7);
+  border-block-start-color: var(--oc-gray-6);
+}
+
+/* jQuery UI 공통 위젯 */
+.ui-widget-header {
+  background-color: var(--oc-gray-7);
+  border-color: var(--oc-gray-6);
+  color: var(--oc-gray-2);
+}
+.ui-widget-overlay {
+  background-color: var(--oc-black);
+  opacity: 0.5;
+}
+.ui-state-default, .ui-widget-content .ui-state-default {
+  background-color: var(--oc-gray-7);
+  border-color: var(--oc-gray-6);
+  color: var(--oc-gray-2);
+}
+.ui-state-hover, .ui-widget-content .ui-state-hover {
+  background-color: var(--oc-gray-6);
+  border-color: var(--oc-gray-5);
+  color: var(--oc-gray-1);
+}
+.ui-state-active, .ui-widget-content .ui-state-active {
+  background-color: var(--oc-blue-7);
+  border-color: var(--oc-blue-6);
+  color: var(--oc-white);
+}
+.ui-state-highlight, .ui-widget-content .ui-state-highlight {
+  background-color: rgba(var(--oc-blue-9-rgb), 0.2);
+  border-color: var(--oc-blue-7);
+  color: var(--oc-gray-1);
+}
+
+/* jQuery UI 날짜 선택기 */
+.ui-datepicker {
+  background-color: var(--oc-gray-8);
+  border-color: var(--oc-gray-6);
+}
+.ui-datepicker .ui-datepicker-header {
+  background-color: var(--oc-gray-7);
+  border-color: var(--oc-gray-6);
+  color: var(--oc-gray-2);
+}
+.ui-datepicker td a {
+  background-color: var(--oc-gray-8);
+  color: var(--oc-gray-2);
+}
+.ui-datepicker td a:hover {
+  background-color: var(--oc-gray-6);
+  color: var(--oc-gray-1);
+}
+.ui-datepicker td a.ui-state-active {
+  background-color: var(--oc-blue-7);
+  color: var(--oc-white);
+}
+.ui-datepicker .ui-datepicker-today a {
+  background-color: rgba(var(--oc-blue-9-rgb), 0.2);
+  color: var(--oc-blue-4);
+}
+
+/* tribute (@멘션) */
+.tribute-container ul {
+  background-color: var(--oc-gray-8);
+  border-color: var(--oc-gray-6);
+}
+
+/***** 캘린더 *****/
+
+table.cal {
+  border-color: var(--oc-gray-6);
+}
+table.cal thead th {
+  background-color: var(--oc-gray-7);
+}
+table.cal td {
+  background-color: var(--oc-gray-8);
+  border-color: var(--oc-gray-7);
+}
+table.cal td.odd {
+  background-color: var(--oc-gray-9);
+}
+table.cal td.today {
+  background-color: rgba(var(--oc-blue-9-rgb), 0.15);
+}
+
+/***** Gantt *****/
+
+.gantt_hdr {
+  background-color: var(--oc-gray-7);
+  border-color: var(--oc-gray-6);
+  color: var(--oc-gray-2);
+}
+
+/***** 메인 메뉴 *****/
+
+#main-menu {
+  background: var(--oc-gray-8);
+  border-block-end: 1px solid var(--oc-gray-7);
+}
+#main-menu li a {
+  color: var(--oc-gray-3);
+  background: transparent;
+}
+#main-menu li a:hover {
+  background: var(--oc-gray-7);
+  color: var(--oc-gray-1);
+}
+#main-menu li a.selected, #main-menu li a.selected:hover {
+  background: var(--oc-gray-8);
+  color: var(--oc-gray-1);
+  border-block-end-color: var(--oc-gray-8);
+}
+
+#main-menu .menu-children {
+  background-color: var(--oc-gray-8);
+  border-color: var(--oc-gray-6);
+}
+#main-menu .menu-children li a {
+  color: var(--oc-gray-2);
+  background-color: var(--oc-gray-8);
+}
+#main-menu .menu-children li a:hover {
+  color: var(--oc-white);
+  background-color: var(--oc-blue-7);
+}
+
+/***** SVG 아이콘 *****/
+
+.icon-svg {
+  stroke: var(--oc-gray-3);
+}
+
+/***** 기타 *****/
+
+p.warning {
+  background-color: rgba(var(--oc-yellow-9-rgb), 0.2);
+  border-color: var(--oc-yellow-7);
+  color: var(--oc-yellow-3);
+}
+
+.nodata, .nodata a {
+  color: var(--oc-gray-5);
+}
+
+.decoration-red, a.decoration-red {
+  color: var(--oc-red-4);
+}
+
+/* 내 페이지 */
+.mypage-box {
+  border-color: var(--oc-gray-6);
+  color: var(--oc-gray-2);
+  box-shadow: 0 1px 2px rgba(var(--oc-black-rgb), 0.2);
+}
+.block-receiver {
+  border-color: var(--oc-gray-8);
+}
+.dragging .block-receiver {
+  border-color: var(--oc-gray-5);
+}
+
+/* 메인 메뉴 new-object */
+#main-menu li a.new-object {
+  background-color: rgba(var(--oc-white-rgb), 0.1);
+}
+
+/* 버전 요약 */
+div#version-summary {
+  background-color: var(--oc-gray-8);
+}
+
+/* 로드맵 타겟 */
+div#roadmap header:target {
+  background-color: rgba(var(--oc-blue-9-rgb), 0.2);
+}
+
+/* 시간 리포트 합계 */
+table#time-report tbody tr.total {
+  background-color: var(--oc-gray-7);
+  border-block-start-color: var(--oc-gray-6);
+}
+
+/* 첨부파일 */
+.attachments_fields input.filename, #existing-attachments .filename {
+  color: var(--oc-gray-3);
+}
+
+/* 검색 */
+.quick-search input {
+  background: var(--oc-gray-7);
+  color: var(--oc-gray-1);
+}
+
+/* 알림 배경 (flash) */
+div.flash.notice { background-color: rgba(var(--oc-green-9-rgb), 0.15); }
+div.flash.warning { background-color: rgba(var(--oc-yellow-9-rgb), 0.15); }
+div.flash.error { background-color: rgba(var(--oc-red-9-rgb), 0.15); }
+
+/* 캘린더 */
+.cal .calbody.this-month { background-color: var(--oc-gray-8); }
+.cal .calbody.other-month { background-color: var(--oc-gray-9); }
+.cal .calbody.nwday:not(.other-month) { background-color: var(--oc-gray-9); }
+
+/* 진행률 바 todo */
+table.progress td.todo { background: var(--oc-gray-6); }
+
+/* 탭 selected hover */
+#content .tabs ul li a.selected:hover { background-color: var(--oc-gray-8); }
+
+/* 드롭다운 메뉴 기본 배경 */
+.drdn-content {
+  background-color: var(--oc-gray-8);
+}
+
+/* select 드롭다운 화살표 */
+select {
+  background-image: none;
+}
+
+/* 코드 복사 버튼 */
+div.pre-wrapper a.copy-pre-content-link {
+  background: var(--oc-gray-8);
+}
+
+/* 사이드바 스위치 배경 */
+#sidebar-switch-panel {
+  background-color: var(--oc-gray-8);
+}
+
+/* 저널 타겟 */
+.journals div:target .journal-content .wiki {
+  color: var(--oc-gray-2);
+}
+
+/* 체크박스 */
+input[type="checkbox"] {
+  accent-color: var(--oc-blue-7);
+}
+
+/* sample-data 테이블 */
+.sample-data {
+  background-color: var(--oc-gray-8);
+  border-color: var(--oc-gray-6);
+}
+
+/* tribute (멘션) 하이라이트 */
+.tribute-container li.highlight {
+  background-color: var(--oc-blue-7);
+  color: var(--oc-white);
+}
+
+/* 프린트 배경 */
+@media print {
+  #main { background: var(--oc-white); }
+  #content { background: var(--oc-white); color: var(--oc-black); }
+}
+
+/* 활동 (activity) */
+div#activity h3 {
+  background-color: var(--oc-gray-7);
+}
+div#activity dt {
+  border-block-start-color: var(--oc-gray-7);
+}
+div#activity dt .time {
+  color: var(--oc-gray-4);
+}
+div#activity dd span.description {
+  color: var(--oc-gray-4);
+}
+
+/* flyout 메뉴 (모바일) */
+.flyout-menu {
+  background-color: var(--oc-gray-9);
+  color: var(--oc-gray-2);
+}
+
+/* 쿼리 합계 */
+.query-totals { color: var(--oc-gray-4); }
+.query-totals .value { color: var(--oc-gray-2); }
+
+/* 뱃지 */
+.badge {
+  background-color: var(--oc-blue-7);
+  color: var(--oc-white);
+}
+
+/* 트리뷰/사이드바 토글 */
+a#toggle-completed-versions { color: var(--oc-gray-4); }
+
+/* 워크플로우 테이블 */
+table.transitions td.enabled { background: rgba(var(--oc-green-9-rgb), 0.2); }
+table.fields_permissions td.readonly { background: var(--oc-gray-6); }
+table.fields_permissions td.required { background: rgba(var(--oc-red-9-rgb), 0.3); }
+
+/* diff */
+.diff_out { background-color: rgba(var(--oc-red-9-rgb), 0.15); }
+.diff_in { background-color: rgba(var(--oc-green-9-rgb), 0.15); }
+
+/***** 에디터 (jstoolbar) *****/
+
+.jstElements button {
+  background-color: var(--oc-gray-7);
+  border-color: var(--oc-gray-6);
+}
+.jstElements button:hover {
+  background-color: var(--oc-gray-6);
+  border-color: var(--oc-gray-5);
+}
+.jstb_pre::before {
+  color: var(--oc-gray-2);
+}
+
+.wiki-preview,
+.jstBlock .wiki-preview,
+#content .wiki-preview {
+  color: var(--oc-gray-2);
+  background-color: var(--oc-gray-8);
+  border-color: var(--oc-gray-6);
+}
+.wiki-preview p.empty-preview {
+  color: var(--oc-gray-5);
+}
+
+textarea.wiki-edit,
+.wiki-preview,
+.jstBlock .wiki-preview,
+#content .wiki-preview {
+  padding: 8px;
+}
+
+/* 테이블 생성기 */
+.table-generator td {
+  background-color: var(--oc-gray-7);
+  border-color: var(--oc-gray-5);
+}
+.table-generator td.selected-cell, .table-generator td:hover {
+  background-color: rgba(var(--oc-blue-9-rgb), 0.3);
+}
+
+/***** 구문 하이라이트 (Rouge) *****/
+
+.syntaxhl { background: var(--oc-gray-9); }
+.syntaxhl .hll { background-color: rgba(var(--oc-yellow-9-rgb), 0.2); }
+.syntaxhl .c, .syntaxhl .ch, .syntaxhl .cm, .syntaxhl .cpf, .syntaxhl .c1 { color: #6a737d; }
+.syntaxhl .k, .syntaxhl .kc, .syntaxhl .kd, .syntaxhl .kn, .syntaxhl .kr { color: #ff7b72; }
+.syntaxhl .kp { color: #79c0ff; }
+.syntaxhl .kt { color: #ff7b72; }
+.syntaxhl .o { color: var(--oc-gray-3); }
+.syntaxhl .cp { color: #79c0ff; }
+.syntaxhl .cs { color: #ff7b72; }
+.syntaxhl .gd { color: #ffa198; background-color: rgba(var(--oc-red-9-rgb), 0.15); }
+.syntaxhl .gi { color: #7ee787; background-color: rgba(var(--oc-green-9-rgb), 0.15); }
+.syntaxhl .gr { color: #ffa198; }
+.syntaxhl .err { color: #ffa198; background-color: transparent; }
+.syntaxhl .gh, .syntaxhl .gu { color: #79c0ff; font-weight: bold; }
+.syntaxhl .go { color: #8b949e; }
+.syntaxhl .gp { color: #8b949e; font-weight: bold; }
+.syntaxhl .m, .syntaxhl .mb, .syntaxhl .mf, .syntaxhl .mh, .syntaxhl .mi, .syntaxhl .mo { color: #79c0ff; }
+.syntaxhl .s, .syntaxhl .sa, .syntaxhl .sb, .syntaxhl .dl, .syntaxhl .s1, .syntaxhl .s2, .syntaxhl .sh { color: #a5d6ff; background-color: transparent; }
+.syntaxhl .se { color: #79c0ff; font-weight: normal; background-color: transparent; }
+.syntaxhl .si { color: #a5d6ff; background-color: transparent; }
+.syntaxhl .sx { color: #a5d6ff; background-color: transparent; }
+.syntaxhl .sr { color: #a5d6ff; background-color: transparent; }
+.syntaxhl .sc, .syntaxhl .sd { color: #a5d6ff; }
+.syntaxhl .na { color: #79c0ff; }
+.syntaxhl .nb { color: #ffa657; }
+.syntaxhl .nc { color: #ffa657; font-weight: bold; }
+.syntaxhl .no { color: #79c0ff; font-weight: bold; }
+.syntaxhl .nd { color: #d2a8ff; }
+.syntaxhl .ni { color: #ffa657; }
+.syntaxhl .ne { color: #ffa657; font-weight: bold; }
+.syntaxhl .nf { color: #d2a8ff; font-weight: bold; }
+.syntaxhl .nl { color: #79c0ff; }
+.syntaxhl .nn { color: #ffa657; font-weight: bold; }
+.syntaxhl .nt { color: #7ee787; }
+.syntaxhl .nv { color: #ffa657; }
+.syntaxhl .ow { color: #ff7b72; font-weight: bold; }
+.syntaxhl .w { color: #8b949e; }
+
+/* 이미지 반전 방지 */
+img {
+  filter: none;
+}
+
+/***** 모바일 (responsive) *****/
+
+@media screen and (max-width: 899px) {
+  /* 헤더 크기 축소 */
+  #header {
+    background-color: var(--oc-gray-8);
+    block-size: 52px;
+    min-block-size: 0;
+  }
+
+  #main {
+    padding-block-start: 52px;
+  }
+
+  /* 토글 버튼 */
+  .mobile-toggle-button {
+    border-inline-start-color: var(--oc-gray-6);
+    block-size: 52px;
+    line-height: 52px;
+    font-size: 2rem;
+  }
+
+  /* 프로젝트 점프 (모바일 헤더) */
+  #project-jump.drdn {
+    block-size: 52px;
+    padding-block: 4px;
+  }
+  #project-jump .drdn-trigger {
+    font-size: 1.2em;
+    block-size: 42px;
+    line-height: 34px;
+  }
+  #project-jump .drdn-content {
+    inset-block-start: 52px;
+  }
+
+  /* flyout 메뉴 */
+  .flyout-menu {
+    background-color: var(--oc-gray-9);
+    color: var(--oc-gray-2);
+    inline-size: 280px;
+    inset-inline-end: -280px;
+  }
+  .flyout-menu h3 {
+    color: var(--oc-gray-2);
+    border-block-color: var(--oc-gray-7);
+    background-color: var(--oc-gray-8);
+  }
+  .flyout-menu h4 {
+    color: var(--oc-gray-2);
+  }
+  .flyout-menu a {
+    color: var(--oc-gray-2);
+  }
+  .flyout-menu ul li a {
+    border-block-start-color: var(--oc-gray-7);
+    line-height: 48px;
+    block-size: 48px;
+    padding-block: 0;
+    padding-inline: 12px;
+  }
+  .flyout-menu ul li:first-child a {
+    line-height: 47px;
+    block-size: 47px;
+  }
+  .flyout-menu__avatar {
+    border-block-start-color: var(--oc-gray-7);
+    margin-block-end: 8px;
+    padding-block: 8px;
+  }
+  .flyout-menu__avatar a {
+    color: var(--oc-gray-2);
+  }
+  .flyout-menu .icon svg, .flyout-menu .icon-only svg {
+    stroke: var(--oc-gray-2);
+  }
+  .flyout-menu__sidebar form > ul li {
+    border-block-start-color: var(--oc-gray-7);
+    line-height: 48px;
+    padding-inline: 12px;
+  }
+
+  /* flyout 검색 입력 */
+  .flyout-menu__search input[type='text'] {
+    background-color: var(--oc-gray-7);
+    color: var(--oc-gray-1);
+  }
+
+  /* 프로젝트 선택 드롭다운 (모바일) */
+  #project-jump .drdn-trigger {
+    color: var(--oc-gray-1);
+    background: transparent;
+  }
+  #project-jump .drdn-content {
+    background-color: var(--oc-gray-8);
+    border-color: var(--oc-gray-6);
+  }
+
+  /* 컨텍스트 버튼 */
+  #content>.contextual>a,
+  #content>.contextual .drdn,
+  p.buttons a {
+    border-color: var(--oc-gray-6);
+  }
+
+  /* 캘린더 주번호 */
+  .cal .week-number {
+    border-color: var(--oc-gray-6);
+    background-color: rgba(var(--oc-blue-9-rgb), 0.15);
+  }
+
+  /* Gantt 헤더 보더 */
+  .gantt_subjects_column .gantt_hdr {
+    border-inline-end-color: var(--oc-gray-6);
+  }
+
+  /* sticky 이슈 헤더 */
+  div#sticky-issue-header {
+    background-color: var(--oc-gray-8);
+    inset-block-start: 52px;
+  }
+
+  /* flyout 활성 시 */
+  .flyout-is-active #wrapper, .flyout-is-active #header {
+    inset-inline-end: 280px;
+  }
+
+  /* flyout 검색 */
+  .flyout-menu__search {
+    block-size: 52px;
+    line-height: 44px;
+    padding-block-start: 2px;
+  }
+
+  /* 앵커 스크롤 오프셋 */
+  .controller-issues.action-show div.wiki a[name],
+  .controller-issues.action-show #history div[id^="note-"],
+  .controller-issues.action-show #history div[id^="change-"],
+  .controller-issues.action-show #update {
+    scroll-margin-block-start: 102px;
+  }
+}

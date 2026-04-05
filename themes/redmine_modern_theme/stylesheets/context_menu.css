@@ -1,0 +1,39 @@
+/**
+ * Redmine Modern Theme - 컨텍스트 메뉴
+ * Copyright (C) 2026 JoungSik
+ * This code is released under the GNU General Public License.
+ */
+
+@import url(/context_menu.css);
+
+#context-menu {
+  background-color: var(--oc-gray-8);
+  border-color: var(--oc-gray-6);
+  color: var(--oc-gray-2);
+}
+#context-menu ul {
+  background: var(--oc-gray-8);
+  border-color: var(--oc-gray-6);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+#context-menu li {
+  border-color: var(--oc-gray-8);
+}
+#context-menu li a {
+  color: var(--oc-gray-2);
+}
+#context-menu li:hover {
+  border-color: var(--oc-blue-7);
+  background-color: var(--oc-gray-7);
+}
+#context-menu li a:hover,
+#context-menu li a.focus {
+  color: var(--oc-white);
+}
+#context-menu a.disabled,
+#context-menu a.disabled:hover {
+  color: var(--oc-gray-5);
+}
+#context-menu li.folder a {
+  border-block-end-color: var(--oc-gray-6);
+}
