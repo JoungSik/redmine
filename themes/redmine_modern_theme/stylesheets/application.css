@@ -591,20 +591,18 @@ div.autocomplete ul li.selected {
 
 /***** 캘린더 *****/
 
-table.cal {
+ul.cal {
   border-color: var(--oc-gray-6);
 }
-table.cal thead th {
+.cal .calhead,
+.cal .week-number {
   background-color: var(--oc-gray-7);
+  color: var(--oc-gray-1);
 }
-table.cal td {
-  background-color: var(--oc-gray-8);
+.cal .calbody {
   border-color: var(--oc-gray-7);
 }
-table.cal td.odd {
-  background-color: var(--oc-gray-9);
-}
-table.cal td.today {
+.cal .calbody.today {
   background-color: rgba(var(--oc-blue-9-rgb), 0.15);
 }
 
