@@ -201,7 +201,9 @@ GEM
     net-imap (0.6.3)
       date
       net-protocol
-    net-ldap (0.17.1)
+    net-ldap (0.20.0)
+      base64
+      ostruct
     net-pop (0.1.2)
       net-protocol
     net-protocol (0.2.2)
@@ -438,7 +440,7 @@ DEPENDENCIES
   mini_mime (~> 1.1.0)
   mocha (>= 2.0.1)
   net-imap (~> 0.6.1)
-  net-ldap (~> 0.17.0)
+  net-ldap (~> 0.20.0)
   net-pop (~> 0.1.2)
   net-smtp (~> 0.5.1)
   nokogiri (~> 1.19.1)
