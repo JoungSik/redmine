@@ -26,6 +26,7 @@
 /public/plugin_assets/*
 /themes/*
 !/themes/README
+!/themes/redmine_modern_theme
 /tmp/*
 /tmp/cache/*
 /tmp/pdf/*
