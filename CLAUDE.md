@@ -2,6 +2,15 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## MCP 자동 호출 규칙
+
+### Redmine
+- 프로젝트 ID: `1`
+- 프로젝트 identifier: `redmine`
+- 프로젝트 URL: https://redmine.joungsik.com/projects/redmine
+- 상위 프로젝트: Home (ID: `15`)
+- 이슈 검색/조회 시 `project_id` 파라미터에 `1` 또는 `redmine` 사용
+
 ## 프로젝트 개요
 
 Redmine - Ruby on Rails 기반의 프로젝트 관리 및 이슈 추적 웹 애플리케이션 (GPL v2).
