@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_07_073256) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_05_121927) do
   create_table "attachments", force: :cascade do |t|
     t.integer "author_id", default: 0, null: false
     t.integer "container_id"
@@ -377,6 +377,12 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_07_073256) do
     t.index ["project_id"], name: "news_project_id"
   end
 
+  create_table "non_working_dates", force: :cascade do |t|
+    t.date "date", null: false
+    t.string "name"
+    t.index ["date"], name: "index_non_working_dates_on_date", unique: true
+  end
+
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer "application_id", null: false
     t.string "code_challenge"
@@ -570,6 +576,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_07_073256) do
     t.boolean "is_in_roadmap", default: true, null: false
     t.string "name", limit: 30, default: "", null: false
     t.integer "position"
+    t.boolean "private_by_default", default: false, null: false
   end
 
   create_table "user_preferences", force: :cascade do |t|
@@ -601,8 +608,10 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_07_073256) do
     t.integer "twofa_totp_last_used_at"
     t.string "type"
     t.datetime "updated_on", precision: nil
+    t.index "(lower(login))", name: "index_users_on_lower_login"
     t.index ["auth_source_id"], name: "index_users_on_auth_source_id"
     t.index ["id", "type"], name: "index_users_on_id_and_type"
+    t.index ["login"], name: "index_users_on_login"
     t.index ["type"], name: "index_users_on_type"
   end
 
